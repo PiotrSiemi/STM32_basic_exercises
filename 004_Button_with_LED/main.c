@@ -20,25 +20,25 @@ int main(void)
 	uint32_t volatile *const pPortModeRegister_C 	= (uint32_t*)0x40020800;			// Mode register GPIOC
 	uint32_t volatile *const pPortInputRegister_C  	= (uint32_t*)0x40020810;			// IDR register GPIOC
 	uint32_t volatile *const pPullUpDownRegister_C  = (uint32_t*)0x4002080C;			// PUDR register GPIOC
-	uint32_t volatile *const pOtyper_GPIO_A  		= (uint32_t*)0x40020804;			// Otyper register GPIOA
+	uint32_t volatile *const pOtyper_GPIO_A  	= (uint32_t*)0x40020804;			// Otyper register GPIOA
 
-	*pClockControlRegister|= (5<<0);													//GPIOA, GPIOC clock initialization
+	*pClockControlRegister|= (5<<0);								//GPIOA, GPIOC clock initialization
 
 
-																						// PA5 as output
+													// PA5 as output
 	*pPortModeRegister_A &= ~(3 << 10);
 	*pPortModeRegister_A |= (1 << 10);
-	*pOtyper_GPIO_A &= ~(1 << 5); 														// Pull-pull for LED
+	*pOtyper_GPIO_A &= ~(1 << 5); 									// Push-pull  LED
 
 
-																						// PC13 as input
+													// PC13 as input
 	*pPortModeRegister_C &= ~(3 << 26);
-																						// PC13 PUDR
+													// PC13 PUDR
 	*pPullUpDownRegister_C  &= ~(3 << 26);
 	*pPullUpDownRegister_C  |= (1 << 26);
 
 	while (1) {
-	  uint32_t idr_val = (~(*pPortInputRegister_C) & (1 << 13));						//Pin read
+	  uint32_t idr_val = (~(*pPortInputRegister_C) & (1 << 13));					//Pin read
 	  if (idr_val){
 	    *pPortOutputRegister_A |= (1 << 5);
 	  }else{

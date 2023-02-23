@@ -22,22 +22,22 @@ int main(void)
 	uint32_t volatile *pPortInputRegister_A0  = (uint32_t*)0x40020010; 			// IDR register
 
 
-	*pClockControlRegister|= (1<<0);											//Clock initialization
+	*pClockControlRegister|= (1<<0);							//Clock initialization
 
-																				//PA5 as output
+												//PA5 as output
 	*pPortModeRegister_A &= ~(3 << 10);
 	*pPortModeRegister_A |= (1 << 10);
 
 
 
-																				//PA0 as input
+												//PA0 as input
 	*pPortModeRegister_A0 &= ~(3 << 0);
 
 
 
 while(1)
 	{
-	uint8_t volatile  A0_pin_status = (uint8_t) (*pPortInputRegister_A0 & 0x1); //Read the PA0 pin status
+	uint8_t volatile  A0_pin_status = (uint8_t) (*pPortInputRegister_A0 & 0x1); 		//Read the PA0 pin status
 		if(A0_pin_status)
 		{
 		*pPortOutputRegister_A |= (1 << 5);

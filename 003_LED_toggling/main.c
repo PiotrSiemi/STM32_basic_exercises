@@ -18,11 +18,11 @@ int main(void)
 	GPIOx_ODR_t   volatile *const pPortOutputRegister_A = ADDR_GPIOA_OUT_REG; 	//ODR register
 
 
-	pClockControlRegister->gpioa_en = 1;										//Clock initialization
+	pClockControlRegister->gpioa_en = 1;						//Clock initialization
 
-	pPortModeRegister_A->pin_5 = 1;												//PA5 as output
+	pPortModeRegister_A->pin_5 = 1;							//PA5 as output
 
-	while(1) 																	//LED blinking loop (XOR)
+	while(1) 									//LED blinking loop (XOR)
 	{
 	pPortOutputRegister_A->pin_5 ^= 1;
 	Delay();
@@ -32,6 +32,6 @@ int main(void)
 
 void Delay(void)
 {
-	for(uint32_t i = 0; i < 300000; i++);										//150ms delay
+	for(uint32_t i = 0; i < 300000; i++);						//150ms delay
 }
 

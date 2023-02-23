@@ -13,26 +13,26 @@
 int main(void)
 {
 
-	RCC_AHB1ENR_t  volatile *const pClockControlRegister = ADDR_AHB1ENR_REG; 			// Clock
-	GPIOx_MODE_t   volatile *const pPortModeRegister_A 	 = ADDR_GPIOA_MODE_REG;			// Mode register GPIOA
-	GPIOx_ODR_t    volatile *const pPortOutputRegister_A = ADDR_GPIOA_OUT_REG; 			// ODR register GPIOA
-	GPIOx_MODE_t   volatile *const pPortModeRegister_C 	 = ADDR_GPIOC_MODE_REG;			// Mode register GPIOC
-	GPIOx_ODR_t    volatile *const pPortInputRegister_C  = ADDR_GPIOC_IN_REG;			// IDR register GPIOC
-	GPIOx_PUPDR_t  volatile *const pPullUpDownRegister_C = ADDR_GPIOC_PUD_REG;			// PUD register GPIOC
-	GPIOx_OTYPER_t volatile *const pOtyper_GPIO_A  		 = ADDR_GPIOA_OTYPE_REG;		// Otype register GPIOA
+	RCC_AHB1ENR_t  volatile *const pClockControlRegister 	= ADDR_AHB1ENR_REG; 			// Clock
+	GPIOx_MODE_t   volatile *const pPortModeRegister_A 	= ADDR_GPIOA_MODE_REG;			// Mode register GPIOA
+	GPIOx_ODR_t    volatile *const pPortOutputRegister_A	= ADDR_GPIOA_OUT_REG; 			// ODR register GPIOA
+	GPIOx_MODE_t   volatile *const pPortModeRegister_C 	= ADDR_GPIOC_MODE_REG;			// Mode register GPIOC
+	GPIOx_ODR_t    volatile *const pPortInputRegister_C 	= ADDR_GPIOC_IN_REG;			// IDR register GPIOC
+	GPIOx_PUPDR_t  volatile *const pPullUpDownRegister_C 	= ADDR_GPIOC_PUD_REG;			// PUD register GPIOC
+	GPIOx_OTYPER_t volatile *const pOtyper_GPIO_A  		= ADDR_GPIOA_OTYPE_REG;			// Otype register GPIOA
 
-	pClockControlRegister->gpioa_en = 1;												//GPIOA clock initialization
-	pClockControlRegister->gpioc_en = 1;												//GPIOC clock initialization
+	pClockControlRegister->gpioa_en = 1;								//GPIOA clock initialization
+	pClockControlRegister->gpioc_en = 1;								//GPIOC clock initialization
 
-	pPortModeRegister_A->pin_5 = 1;														// PA5 as output
-	pOtyper_GPIO_A->pin_5 = 0; 															// Push-pull LED
+	pPortModeRegister_A->pin_5 = 1;									// PA5 as output
+	pOtyper_GPIO_A->pin_5 = 0; 									// Push-pull LED
 
-	pPortModeRegister_C->pin_13 = 0;													// PC13 as input
+	pPortModeRegister_C->pin_13 = 0;								// PC13 as input
 
-	pPullUpDownRegister_C->pin_13 = 1;													// PC13 PUDR
+	pPullUpDownRegister_C->pin_13 = 1;								// PC13 PUDR
 
 	while (1) {
-	  uint32_t idr_val = pPortInputRegister_C->pin_13;									//Pin read
+	  uint32_t idr_val = pPortInputRegister_C->pin_13;						//Pin read
 	  if (idr_val){
 	    pPortOutputRegister_A->pin_5 = 0;
 	  }else{

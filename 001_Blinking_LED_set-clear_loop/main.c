@@ -20,14 +20,14 @@ int main(void)
 
 
 
-	*pClockControlRegister|= (1); 									//Clock initialization
+	*pClockControlRegister|= (1); 								//Clock initialization
 
-																	//PA5 as an output
+												//PA5 as an output
 	*pPortModeRegister_A &= ~(3 << 10); 							//10 and 11 bit as zeros
-	*pPortModeRegister_A |= (1 << 10); 								//10 bit as 1
+	*pPortModeRegister_A |= (1 << 10); 							//10 bit as 1
 
 
-	while(1) 														//LED blinking loop (set-clear)
+	while(1) 										//LED blinking loop (set-clear)
 	{
 	*pPortOutputRegister_A |= (1 << 5);
 	Delay();
